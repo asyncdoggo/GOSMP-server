@@ -4,7 +4,7 @@ import pandas as pd
 from pydantic.config import ConfigDict
 from app.functions.optimizer import get_returns, load_nifty, without_optimization,optimize, backtest_with_nifty, total_return
 from app.functions.data_cleaning import load_and_clean
-
+import json
 from pydantic import BaseModel
 
 router = APIRouter()
@@ -14,7 +14,9 @@ class OptimizerRequestModel(BaseModel):
     risk_category: str
     risk_score: float
     invest_amount: float
-    duration: int
+    duration: int # months
+    index: str = "nifty500"
+    sector_weights: dict = {}
 
 
 class OptimizerResponseModel(BaseModel):
@@ -22,12 +24,18 @@ class OptimizerResponseModel(BaseModel):
     optimized_results: dict
 
 
-@router.post("/optimize")
+@router.post("/optimize/")
 async def optimize_route(request: OptimizerRequestModel):
     risk_category = request.risk_category
     risk_score = request.risk_score
     invest_amount = request.invest_amount
     duration = request.duration
+    sector_weights = request.sector_weights
+
+    if sum(sector_weights.values()) > 1:
+        return {"error": "Sum of sector weights should be less than or equal to 1"}
+
+
     data_path = "app/data/nifty500_data.csv"
 
     exp_ret_type = {
@@ -68,6 +76,13 @@ async def optimize_route(request: OptimizerRequestModel):
         }
 
 
+    if request.index == "nifty500":
+        with open("app/data/nifty500_sectors.json") as f:
+            sectors_map = json.load(f)
+        
+    sector_lower = request.sector_weights
+
+    sector_upper = {}
 
 
     df = pd.read_csv(data_path)
@@ -77,7 +92,7 @@ async def optimize_route(request: OptimizerRequestModel):
 
     portfolio_variance, portfolio_volatility, portfolio_annual_return, percent_var, percent_vols, percent_ret = without_optimization(timed_df)
 
-    performance, invested, weights, remaining = optimize(timed_df, exp_ret_type, cov_type, weight_type, invest_amount)
+    performance, invested, weights, remaining = optimize(timed_df, exp_ret_type, cov_type, weight_type, invest_amount, sectors_map, sector_lower, sector_upper)
     expected_returns, volatility, sharpe_ratio = performance
 
 

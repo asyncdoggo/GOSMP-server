@@ -45,9 +45,9 @@ def without_optimization(timed_df: pd.DataFrame):
     return port_variance, port_volatility, port_annual_return, percent_var, percent_vols, percent_ret
 
 
-def optimize(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_type: dict, invest_amount: int):
+def optimize(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_type: dict, invest_amount: int, sectors_map: dict, sector_lower: dict, sector_upper: dict):
     performance, refined_weights = efficient_frontier(
-        timed_df, exp_ret_type, cov_type, weight_type)
+        timed_df, exp_ret_type, cov_type, weight_type, sectors_map, sector_lower, sector_upper)
 
     start_date = timed_df.index[timed_df.index.get_indexer(
         [datetime.datetime.now().date()], method='nearest')][0].date()
@@ -67,7 +67,7 @@ def optimize(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_
     return performance, invested, refined_weights_percent, remaining
 
 
-def efficient_frontier(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_type: dict):
+def efficient_frontier(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_type: dict, sectors_map: dict, sector_lower: dict, sector_upper: dict):
     """
     timed_df: pd.DataFrame: The processed df with the date as the index and the stock prices as the columns.
     exp_ret_type: dict: The expected return type to be used in the optimization.
@@ -132,6 +132,8 @@ def efficient_frontier(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dic
 
     # Optimize for the maximal Sharpe ratio
     ef = EfficientFrontier(mu, S_f, solver="ECOS")
+
+    ef.add_sector_constraints(sectors_map, sector_lower, sector_upper)
 
     if weight_type["type"] == "max_sharpe":
         ef.max_sharpe()

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from app.routers import optimizer
+from app.routers import optimizer, sectors
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -15,6 +15,7 @@ app.add_middleware(
 
 
 app.include_router(optimizer.router)
+app.include_router(sectors.router)
 
 @app.get("/")
 def root():
