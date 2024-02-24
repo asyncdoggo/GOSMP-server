@@ -1,0 +1,498 @@
+,Company,Sector
+0,360ONE,Financial Services
+1,3MINDIA,Diversified
+2,ABB,Capital Goods
+3,ACC,Construction Materials
+4,AIAENG,Capital Goods
+5,APLAPOLLO,Capital Goods
+6,AUBANK,Financial Services
+7,AARTIDRUGS,Healthcare
+8,AARTIIND,Chemicals
+9,AAVAS,Financial Services
+10,ABBOTINDIA,Healthcare
+11,ADANIENSOL,Power
+12,ADANIENT,Metals & Mining
+13,ADANIGREEN,Power
+14,ADANIPORTS,Services
+15,ADANIPOWER,Power
+16,ATGL,"Oil, Gas & Consumable Fuels"
+17,AWL,Fast Moving Consumer Goods
+18,ABCAPITAL,Financial Services
+19,ABFRL,Consumer Services
+20,AEGISCHEM,"Oil, Gas & Consumable Fuels"
+21,AETHER,Chemicals
+22,AFFLE,Information Technology
+23,AJANTPHARM,Healthcare
+24,APLLTD,Healthcare
+25,ALKEM,Healthcare
+26,ALKYLAMINE,Chemicals
+27,ALLCARGO,Services
+28,ALOKINDS,Textiles
+29,ARE&M,Automobile and Auto Components
+30,AMBER,Consumer Durables
+31,AMBUJACEM,Construction Materials
+32,ANGELONE,Financial Services
+33,ANURAS,Chemicals
+34,APARINDS,Capital Goods
+35,APOLLOHOSP,Healthcare
+36,APOLLOTYRE,Automobile and Auto Components
+37,APTUS,Financial Services
+38,ACI,Chemicals
+39,ASAHIINDIA,Automobile and Auto Components
+40,ASHOKLEY,Capital Goods
+41,ASIANPAINT,Consumer Durables
+42,ASTERDM,Healthcare
+43,ASTRAL,Capital Goods
+44,ATUL,Chemicals
+45,AUROPHARMA,Healthcare
+46,AVANTIFEED,Fast Moving Consumer Goods
+47,DMART,Consumer Services
+48,AXISBANK,Financial Services
+49,BEML,Capital Goods
+50,BLS,Consumer Services
+51,BAJAJ-AUTO,Automobile and Auto Components
+52,BAJFINANCE,Financial Services
+53,BAJAJFINSV,Financial Services
+54,BAJAJHLDNG,Financial Services
+55,BALAMINES,Chemicals
+56,BALKRISIND,Automobile and Auto Components
+57,BALRAMCHIN,Fast Moving Consumer Goods
+58,BANDHANBNK,Financial Services
+59,BANKBARODA,Financial Services
+60,BANKINDIA,Financial Services
+61,MAHABANK,Financial Services
+62,BATAINDIA,Consumer Durables
+63,BAYERCROP,Chemicals
+64,BERGEPAINT,Consumer Durables
+65,BDL,Capital Goods
+66,BEL,Capital Goods
+67,BHARATFORG,Capital Goods
+68,BHEL,Capital Goods
+69,BPCL,"Oil, Gas & Consumable Fuels"
+70,BHARTIARTL,Telecommunication
+71,BIKAJI,Fast Moving Consumer Goods
+72,BIOCON,Healthcare
+73,BIRLACORPN,Construction Materials
+74,BSOFT,Information Technology
+75,BLUEDART,Services
+76,BLUESTARCO,Consumer Durables
+77,BBTC,Fast Moving Consumer Goods
+78,BORORENEW,Capital Goods
+79,BOSCHLTD,Automobile and Auto Components
+80,BRIGADE,Realty
+81,BCG,Information Technology
+82,BRITANNIA,Fast Moving Consumer Goods
+83,MAPMYINDIA,Information Technology
+84,CCL,Fast Moving Consumer Goods
+85,CESC,Power
+86,CGPOWER,Capital Goods
+87,CIEINDIA,Automobile and Auto Components
+88,CRISIL,Financial Services
+89,CSBBANK,Financial Services
+90,CAMPUS,Consumer Durables
+91,CANFINHOME,Financial Services
+92,CANBK,Financial Services
+93,CGCL,Financial Services
+94,CARBORUNIV,Capital Goods
+95,CASTROLIND,"Oil, Gas & Consumable Fuels"
+96,CEATLTD,Automobile and Auto Components
+97,CENTRALBK,Financial Services
+98,CENTURYPLY,Consumer Durables
+99,CENTURYTEX,Forest Materials
+100,CERA,Consumer Durables
+101,CHALET,Consumer Services
+102,CHAMBLFERT,Chemicals
+103,CHEMPLASTS,Chemicals
+104,CHOLAHLDNG,Financial Services
+105,CHOLAFIN,Financial Services
+106,CIPLA,Healthcare
+107,CUB,Financial Services
+108,CLEAN,Chemicals
+109,COALINDIA,"Oil, Gas & Consumable Fuels"
+110,COFORGE,Information Technology
+111,COLPAL,Fast Moving Consumer Goods
+112,CAMS,Financial Services
+113,CONCORDBIO,Healthcare
+114,CONCOR,Services
+115,COROMANDEL,Chemicals
+116,CRAFTSMAN,Automobile and Auto Components
+117,CREDITACC,Financial Services
+118,CROMPTON,Consumer Durables
+119,CUMMINSIND,Capital Goods
+120,CYIENT,Information Technology
+121,DCMSHRIRAM,Diversified
+122,DLF,Realty
+123,DABUR,Fast Moving Consumer Goods
+124,DALBHARAT,Construction Materials
+125,DATAPATTNS,Capital Goods
+126,DEEPAKFERT,Chemicals
+127,DEEPAKNTR,Chemicals
+128,DELHIVERY,Services
+129,DELTACORP,Consumer Services
+130,DEVYANI,Consumer Services
+131,DIVISLAB,Healthcare
+132,DIXON,Consumer Durables
+133,LALPATHLAB,Healthcare
+134,DRREDDY,Healthcare
+135,EIDPARRY,Chemicals
+136,EIHOTEL,Consumer Services
+137,EPL,Capital Goods
+138,EASEMYTRIP,Consumer Services
+139,EICHERMOT,Automobile and Auto Components
+140,ELGIEQUIP,Capital Goods
+141,EMAMILTD,Fast Moving Consumer Goods
+142,ENDURANCE,Automobile and Auto Components
+143,ENGINERSIN,Construction
+144,EPIGRAL,Chemicals
+145,EQUITASBNK,Financial Services
+146,ERIS,Healthcare
+147,ESCORTS,Capital Goods
+148,EXIDEIND,Automobile and Auto Components
+149,FDC,Healthcare
+150,NYKAA,Consumer Services
+151,FEDERALBNK,Financial Services
+152,FACT,Chemicals
+153,FINEORG,Chemicals
+154,FINCABLES,Capital Goods
+155,FINPIPE,Capital Goods
+156,FSL,Services
+157,FIVESTAR,Financial Services
+158,FORTIS,Healthcare
+159,GRINFRA,Construction
+160,GAIL,"Oil, Gas & Consumable Fuels"
+161,GMMPFAUDLR,Capital Goods
+162,GMRINFRA,Services
+163,GALAXYSURF,Chemicals
+164,GICRE,Financial Services
+165,GILLETTE,Fast Moving Consumer Goods
+166,GLAND,Healthcare
+167,GLAXO,Healthcare
+168,GLS,Healthcare
+169,GLENMARK,Healthcare
+170,MEDANTA,Healthcare
+171,GOCOLORS,Consumer Services
+172,GPIL,Capital Goods
+173,GODFRYPHLP,Fast Moving Consumer Goods
+174,GODREJCP,Fast Moving Consumer Goods
+175,GODREJIND,Diversified
+176,GODREJPROP,Realty
+177,GRANULES,Healthcare
+178,GRAPHITE,Capital Goods
+179,GRASIM,Construction Materials
+180,GESHIP,Services
+181,GRINDWELL,Capital Goods
+182,GUJALKALI,Chemicals
+183,GAEL,Fast Moving Consumer Goods
+184,FLUOROCHEM,Chemicals
+185,GUJGASLTD,"Oil, Gas & Consumable Fuels"
+186,GNFC,Chemicals
+187,GPPL,Services
+188,GSFC,Chemicals
+189,GSPL,"Oil, Gas & Consumable Fuels"
+190,HEG,Capital Goods
+191,HCLTECH,Information Technology
+192,HDFCAMC,Financial Services
+193,HDFCBANK,Financial Services
+194,HDFCLIFE,Financial Services
+195,HFCL,Telecommunication
+196,HLEGLAS,Capital Goods
+197,HAPPSTMNDS,Information Technology
+198,HAVELLS,Consumer Durables
+199,HEROMOTOCO,Automobile and Auto Components
+200,HINDALCO,Metals & Mining
+201,HAL,Capital Goods
+202,HINDCOPPER,Metals & Mining
+203,HINDPETRO,"Oil, Gas & Consumable Fuels"
+204,HINDUNILVR,Fast Moving Consumer Goods
+205,HINDZINC,Metals & Mining
+206,POWERINDIA,Capital Goods
+207,HOMEFIRST,Financial Services
+208,HONAUT,Capital Goods
+209,HUDCO,Financial Services
+210,ICICIBANK,Financial Services
+211,ICICIGI,Financial Services
+212,ICICIPRULI,Financial Services
+213,ISEC,Financial Services
+214,IDBI,Financial Services
+215,IDFCFIRSTB,Financial Services
+216,IDFC,Financial Services
+217,IIFL,Financial Services
+218,IRB,Construction
+219,IRCON,Construction
+220,ITC,Fast Moving Consumer Goods
+221,ITI,Telecommunication
+222,INDIACEM,Construction Materials
+223,IBULHSGFIN,Financial Services
+224,INDIAMART,Consumer Services
+225,INDIANB,Financial Services
+226,IEX,Financial Services
+227,INDHOTEL,Consumer Services
+228,IOC,"Oil, Gas & Consumable Fuels"
+229,IOB,Financial Services
+230,IRCTC,Consumer Services
+231,IRFC,Financial Services
+232,INDIGOPNTS,Consumer Durables
+233,IGL,"Oil, Gas & Consumable Fuels"
+234,INDUSTOWER,Telecommunication
+235,INDUSINDBK,Financial Services
+236,INFIBEAM,Financial Services
+237,NAUKRI,Consumer Services
+238,INFY,Information Technology
+239,INGERRAND,Capital Goods
+240,INTELLECT,Information Technology
+241,INDIGO,Services
+242,IPCALAB,Healthcare
+243,JBCHEPHARM,Healthcare
+244,JKCEMENT,Construction Materials
+245,JBMA,Automobile and Auto Components
+246,JKLAKSHMI,Construction Materials
+247,JKPAPER,Forest Materials
+248,JMFINANCIL,Financial Services
+249,JSWENERGY,Power
+250,JSWSTEEL,Metals & Mining
+251,JAMNAAUTO,Automobile and Auto Components
+252,JINDALSAW,Capital Goods
+253,JSL,Metals & Mining
+254,JINDALSTEL,Metals & Mining
+255,JUBLFOOD,Consumer Services
+256,JUBLINGREA,Chemicals
+257,JUBLPHARMA,Healthcare
+258,JUSTDIAL,Consumer Services
+259,JYOTHYLAB,Fast Moving Consumer Goods
+260,KPRMILL,Textiles
+261,KEI,Capital Goods
+262,KNRCON,Construction
+263,KPITTECH,Information Technology
+264,KRBL,Fast Moving Consumer Goods
+265,KSB,Capital Goods
+266,KAJARIACER,Consumer Durables
+267,KPIL,Construction
+268,KALYANKJIL,Consumer Durables
+269,KANSAINER,Consumer Durables
+270,KARURVYSYA,Financial Services
+271,KAYNES,Capital Goods
+272,KEC,Capital Goods
+273,KFINTECH,Financial Services
+274,KOTAKBANK,Financial Services
+275,KIMS,Healthcare
+276,L&TFH,Financial Services
+277,LTTS,Information Technology
+278,LICHSGFIN,Financial Services
+279,LTIM,Information Technology
+280,LAXMIMACH,Capital Goods
+281,LT,Construction
+282,LATENTVIEW,Information Technology
+283,LAURUSLABS,Healthcare
+284,LXCHEM,Chemicals
+285,LEMONTREE,Consumer Services
+286,LICI,Financial Services
+287,LINDEINDIA,Chemicals
+288,LUPIN,Healthcare
+289,LUXIND,Textiles
+290,MMTC,Services
+291,MRF,Automobile and Auto Components
+292,MTARTECH,Capital Goods
+293,LODHA,Realty
+294,MGL,"Oil, Gas & Consumable Fuels"
+295,M&MFIN,Financial Services
+296,M&M,Automobile and Auto Components
+297,MHRIL,Consumer Services
+298,MAHLIFE,Realty
+299,MANAPPURAM,Financial Services
+300,MRPL,"Oil, Gas & Consumable Fuels"
+301,MANKIND,Healthcare
+302,MARICO,Fast Moving Consumer Goods
+303,MARUTI,Automobile and Auto Components
+304,MASTEK,Information Technology
+305,MFSL,Financial Services
+306,MAXHEALTH,Healthcare
+307,MAZDOCK,Capital Goods
+308,MEDPLUS,Consumer Services
+309,METROBRAND,Consumer Durables
+310,METROPOLIS,Healthcare
+311,MINDACORP,Automobile and Auto Components
+312,MSUMI,Automobile and Auto Components
+313,MOTILALOFS,Financial Services
+314,MPHASIS,Information Technology
+315,MCX,Financial Services
+316,MUTHOOTFIN,Financial Services
+317,NATCOPHARM,Healthcare
+318,NBCC,Construction
+319,NCC,Construction
+320,NHPC,Power
+321,NLCINDIA,Power
+322,NMDC,Metals & Mining
+323,NSLNISP,Metals & Mining
+324,NTPC,Power
+325,NH,Healthcare
+326,NATIONALUM,Metals & Mining
+327,NAVINFLUOR,Chemicals
+328,NAZARA,"Media, Entertainment & Publication"
+329,NETWORK18,"Media, Entertainment & Publication"
+330,NAM-INDIA,Financial Services
+331,NUVOCO,Construction Materials
+332,OBEROIRLTY,Realty
+333,ONGC,"Oil, Gas & Consumable Fuels"
+334,OIL,"Oil, Gas & Consumable Fuels"
+335,OLECTRA,Automobile and Auto Components
+336,PAYTM,Financial Services
+337,OFSS,Information Technology
+338,ORIENTELEC,Consumer Durables
+339,POLICYBZR,Financial Services
+340,PCBL,Chemicals
+341,PIIND,Chemicals
+342,PNBHOUSING,Financial Services
+343,PNCINFRA,Construction
+344,PVRINOX,"Media, Entertainment & Publication"
+345,PAGEIND,Textiles
+346,PATANJALI,Fast Moving Consumer Goods
+347,PERSISTENT,Information Technology
+348,PETRONET,"Oil, Gas & Consumable Fuels"
+349,PFIZER,Healthcare
+350,PHOENIXLTD,Realty
+351,PIDILITIND,Chemicals
+352,PEL,Financial Services
+353,PPLPHARMA,Healthcare
+354,POLYMED,Healthcare
+355,POLYCAB,Capital Goods
+356,POLYPLEX,Capital Goods
+357,POONAWALLA,Financial Services
+358,PFC,Financial Services
+359,POWERGRID,Power
+360,PRAJIND,Capital Goods
+361,PRESTIGE,Realty
+362,PRINCEPIPE,Capital Goods
+363,PRSMJOHNSN,Construction Materials
+364,PGHL,Healthcare
+365,PGHH,Fast Moving Consumer Goods
+366,PNB,Financial Services
+367,QUESS,Services
+368,RBLBANK,Financial Services
+369,RECLTD,Financial Services
+370,RHIM,Capital Goods
+371,RITES,Construction
+372,RADICO,Fast Moving Consumer Goods
+373,RVNL,Construction
+374,RAIN,Chemicals
+375,RAINBOW,Healthcare
+376,RAJESHEXPO,Consumer Durables
+377,RALLIS,Chemicals
+378,RCF,Chemicals
+379,RATNAMANI,Capital Goods
+380,RTNINDIA,Services
+381,RAYMOND,Textiles
+382,REDINGTON,Services
+383,RELAXO,Consumer Durables
+384,RELIANCE,"Oil, Gas & Consumable Fuels"
+385,RBA,Consumer Services
+386,ROSSARI,Chemicals
+387,ROUTE,Telecommunication
+388,SBICARD,Financial Services
+389,SBILIFE,Financial Services
+390,SJVN,Power
+391,SKFINDIA,Capital Goods
+392,SRF,Chemicals
+393,SAFARI,Consumer Durables
+394,MOTHERSON,Automobile and Auto Components
+395,SANOFI,Healthcare
+396,SAPPHIRE,Consumer Services
+397,SAREGAMA,"Media, Entertainment & Publication"
+398,SCHAEFFLER,Automobile and Auto Components
+399,SHARDACROP,Chemicals
+400,SFL,Consumer Durables
+401,SHOPERSTOP,Consumer Services
+402,SHREECEM,Construction Materials
+403,RENUKA,Fast Moving Consumer Goods
+404,SHRIRAMFIN,Financial Services
+405,SHYAMMETL,Metals & Mining
+406,SIEMENS,Capital Goods
+407,SOBHA,Realty
+408,SOLARINDS,Chemicals
+409,SONACOMS,Automobile and Auto Components
+410,SONATSOFTW,Information Technology
+411,STARHEALTH,Financial Services
+412,SBIN,Financial Services
+413,SAIL,Metals & Mining
+414,SWSOLAR,Construction
+415,STLTECH,Telecommunication
+416,SUMICHEM,Chemicals
+417,SPARC,Healthcare
+418,SUNPHARMA,Healthcare
+419,SUNTV,"Media, Entertainment & Publication"
+420,SUNDARMFIN,Financial Services
+421,SUNDRMFAST,Automobile and Auto Components
+422,SUNTECK,Realty
+423,SUPRAJIT,Automobile and Auto Components
+424,SUPREMEIND,Capital Goods
+425,SUVENPHAR,Healthcare
+426,SUZLON,Capital Goods
+427,SWANENERGY,Realty
+428,SYMPHONY,Consumer Durables
+429,SYNGENE,Healthcare
+430,SYRMA,Capital Goods
+431,TTKPRESTIG,Consumer Durables
+432,TV18BRDCST,"Media, Entertainment & Publication"
+433,TVSMOTOR,Automobile and Auto Components
+434,TANLA,Information Technology
+435,TATACHEM,Chemicals
+436,TATACOMM,Telecommunication
+437,TCS,Information Technology
+438,TATACONSUM,Fast Moving Consumer Goods
+439,TATAELXSI,Information Technology
+440,TATAINVEST,Financial Services
+441,TATAMTRDVR,Automobile and Auto Components
+442,TATAMOTORS,Automobile and Auto Components
+443,TATAPOWER,Power
+444,TATASTEEL,Metals & Mining
+445,TTML,Telecommunication
+446,TEAMLEASE,Services
+447,TECHM,Information Technology
+448,TEJASNET,Telecommunication
+449,NIACL,Financial Services
+450,RAMCOCEM,Construction Materials
+451,THERMAX,Capital Goods
+452,TIMKEN,Capital Goods
+453,TITAN,Consumer Durables
+454,TORNTPHARM,Healthcare
+455,TORNTPOWER,Power
+456,TRENT,Consumer Services
+457,TRIDENT,Textiles
+458,TRIVENI,Fast Moving Consumer Goods
+459,TRITURBINE,Capital Goods
+460,TIINDIA,Automobile and Auto Components
+461,UCOBANK,Financial Services
+462,UNOMINDA,Automobile and Auto Components
+463,UPL,Chemicals
+464,UTIAMC,Financial Services
+465,UJJIVANSFB,Financial Services
+466,ULTRACEMCO,Construction Materials
+467,UNIONBANK,Financial Services
+468,UBL,Fast Moving Consumer Goods
+469,MCDOWELL-N,Fast Moving Consumer Goods
+470,USHAMART,Capital Goods
+471,VGUARD,Consumer Durables
+472,VMART,Consumer Services
+473,VIPIND,Consumer Durables
+474,VAIBHAVGBL,Consumer Durables
+475,VTL,Textiles
+476,VARROC,Automobile and Auto Components
+477,VBL,Fast Moving Consumer Goods
+478,MANYAVAR,Consumer Services
+479,VEDL,Metals & Mining
+480,VIJAYA,Healthcare
+481,VINATIORGA,Chemicals
+482,IDEA,Telecommunication
+483,VOLTAS,Consumer Durables
+484,WELCORP,Capital Goods
+485,WELSPUNLIV,Textiles
+486,WESTLIFE,Consumer Services
+487,WHIRLPOOL,Consumer Durables
+488,WIPRO,Information Technology
+489,YESBANK,Financial Services
+490,ZFCVINDIA,Automobile and Auto Components
+491,ZEEL,"Media, Entertainment & Publication"
+492,ZENSARTECH,Information Technology
+493,ZOMATO,Consumer Services
+494,ZYDUSLIFE,Healthcare
+495,ZYDUSWELL,Fast Moving Consumer Goods
+496,ECLERX,Services

@@ -1,0 +1,11 @@
+seaborn
+matplotlib
+pandas
+numpy
+pyportfolioopt
+yfinance
+nsepy
+fastapi
+httpx
+tqdm
+uvicorn
