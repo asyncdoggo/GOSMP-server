@@ -12,7 +12,6 @@ router = APIRouter()
 
 class OptimizerRequestModel(BaseModel):
     risk_category: str
-    risk_score: float
     invest_amount: float
     duration: int # months
     index: str = "nifty500"
@@ -27,7 +26,6 @@ class OptimizerResponseModel(BaseModel):
 @router.post("/optimize/")
 async def optimize_route(request: OptimizerRequestModel):
     risk_category = request.risk_category
-    risk_score = request.risk_score
     invest_amount = request.invest_amount
     duration = request.duration
     sector_weights = request.sector_weights

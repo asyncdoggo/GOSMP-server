@@ -9,10 +9,6 @@ warnings.filterwarnings("ignore")
 
 
 def setup():
-    # check if data folder exists
-    if not os.path.exists(os.path.join("app", "data")):
-        os.makedirs("data")
-
     # check if Equity.csv exists
     if not os.path.exists(os.path.join("app", "data", "ind_nifty500list.csv")):
         print("script code csv not found. Please download the file and place it in the data directory with name 'ind_nifty500list.csv'")
@@ -70,7 +66,7 @@ def _download_close_prices():
     close_prices_df = None
     start_date = None
     end_date = None
-
+    save = True
     if os.path.exists(os.path.join("app", "data", "nifty500_data.csv")):
         close_prices_df = pd.read_csv(
             os.path.join("app", "data", "nifty500_data.csv"), index_col=0)
@@ -82,26 +78,29 @@ def _download_close_prices():
             datetime.timedelta(days=1)
 
         # make sure start and end dates are not weekends
-        while start_date.weekday() in [5, 6]:
-            start_date -= datetime.timedelta(days=1)
-        while end_date.weekday() in [5, 6]:
-            end_date -= datetime.timedelta(days=1)
+        # while start_date.weekday() in [5, 6]:
+        #     start_date -= datetime.timedelta(days=1)
+        # while end_date.weekday() in [5, 6]:
+        #     end_date -= datetime.timedelta(days=1)
     else:
         end_date = datetime.datetime.now().date() - datetime.timedelta(days=1)
         start_date = end_date.replace(year=end_date.year - 10)
 
         # make sure start and end dates are not weekends
-        while start_date.weekday() in [5, 6]:
-            start_date -= datetime.timedelta(days=1)
-        while end_date.weekday() in [5, 6]:
-            end_date -= datetime.timedelta(days=1)
+        # while start_date.weekday() in [5, 6]:
+        #     start_date -= datetime.timedelta(days=1)
+        # while end_date.weekday() in [5, 6]:
+        #     end_date -= datetime.timedelta(days=1)
 
         date_range = pd.date_range(start=start_date, end=end_date, freq='D')
         date_range = date_range[date_range.weekday < 5]
 
         close_prices_df = pd.DataFrame(index=date_range)
-
+    if start_date == end_date:
+        print("No new data to fetch")
+        return
     count = len(strip_code_data["Symbol"])
+    close_prices_df.index = pd.to_datetime(close_prices_df.index).date
 
     iterator = tqdm(strip_code_data["Symbol"], total=count, unit="stock")
     save = True
@@ -120,8 +119,8 @@ def _download_close_prices():
                 # update the close prices dataframe
                 d = d[["Close"]]
                 d.columns = [symbol]
-                close_prices_df = close_prices_df.join(d, how="outer")
-
+                d.index = pd.to_datetime(d.index).date
+                close_prices_df = close_prices_df.combine_first(d)
             else:
                 inactive_count += 1
         except Exception as e:
@@ -130,10 +129,14 @@ def _download_close_prices():
         count -= 1
 
     if save:
-        close_prices_df.to_csv(os.path.join(
-            "app", "data", "nifty500_data.csv"), index=True)
-    # return close_prices_df
+        close_prices_df.rename_axis("Date", inplace=True)
+        sorted_close_prices_df = close_prices_df.sort_index()
+        # remove duplicate index
+        sorted_close_prices_df = sorted_close_prices_df[~sorted_close_prices_df.index.duplicated(
+            keep='first')]
 
+        sorted_close_prices_df.to_csv(os.path.join(
+            "app", "data", "nifty500_data.csv"), index=True)
 
 
 if __name__ == "__main__":
