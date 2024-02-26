@@ -64,7 +64,7 @@ def optimize(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_
     invested, remaining = _discrete_allocate(
         invest_amount, refined_weights, timed_df, start_date)
 
-    return performance, invested, refined_weights_percent, remaining
+    return performance, invested, refined_weights_percent, remaining, start_date
 
 
 def efficient_frontier(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_type: dict, sectors_map: dict, sector_lower: dict, sector_upper: dict):
@@ -312,10 +312,10 @@ def backtest_with_nifty(timed_df, invest_amount, invested, weights, duration):
 
     nifty = load_nifty("app/data/nifty.csv")
 
-    start_date = datetime.datetime.now().date() - datetime.timedelta(days=duration+90)
+    start_date = datetime.datetime.now().date() - datetime.timedelta(days=3 * 365)
 
     start_date = timed_df.index[timed_df.index.get_indexer(
-        [], method='nearest')][0].date()
+        [start_date], method='nearest')][0].date()
 
     invested_nifty, remainder_nifty = _allocate_nifty(
         invest_amount, nifty, start_date)
