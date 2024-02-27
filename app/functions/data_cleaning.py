@@ -44,6 +44,8 @@ def load_and_clean(timed_df, risk_cat):
 
 
 def _risk_categorize(timed_df, risk_cat):
+
+    return timed_df
     # classify stocks into risk categories based on volatility
     volatility = timed_df.pct_change().std()
     risk_categories = pd.qcut(volatility, 4, labels=[

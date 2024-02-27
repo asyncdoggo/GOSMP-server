@@ -68,38 +68,6 @@ def optimize(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_
 
 
 def efficient_frontier(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_type: dict, sectors_map: dict, sector_lower: dict, sector_upper: dict):
-    """
-    timed_df: pd.DataFrame: The processed df with the date as the index and the stock prices as the columns.
-    exp_ret_type: dict: The expected return type to be used in the optimization.
-    cov_type: dict: The covariance type to be used in the optimization.
-
-    exp_ret_type: dict: The expected return type to be used in the optimization.
-    1. mean: The mean historical return.
-    dict = {"type": "mean", "frequency": number}
-    2. ema: The exponential moving average return.
-    dict = {"type": "ema", "log_returns": boolean}
-    3. capm: The CAPM return.
-    dict = {"type": "capm"}
-
-    cov_type: dict: The covariance type to be used in the optimization.
-    1. sample_cov: The sample covariance matrix.
-    dict = {"type": "sample_cov"}
-    2. exp_cov: The exponentially weighted covariance matrix.
-    dict = {"type": "exp_cov"}
-    3. shrinkage: The shrunk covariance matrix.
-    dict = {"type": "shrinkage"}
-
-
-    weight_type: dict: The type of weights to be used in the optimization.
-    1. max_sharpe: The maximum Sharpe ratio weights.
-    dict = {"type": "max_sharpe"}
-    2. min_volatility: The minimum volatility weights.
-    dict = {"type": "min_volatility"}
-    3. efficient_risk: The efficient risk weights.
-    dict = {"type": "efficient_risk", "target_volatility": number}
-    4. efficient_return: The efficient return weights.
-    dict = {"type": "efficient_return", "target_return": number}
-    """
     mu = None
     if exp_ret_type["type"] == "mean":
         mu = expected_returns.mean_historical_return(

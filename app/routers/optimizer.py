@@ -16,7 +16,7 @@ class OptimizerRequestModel(BaseModel):
     invest_amount: float
     duration: int # months
     index: str = "nifty500"
-    sector_weights: dict = {}
+    sector_weights: dict = {} # decimal weights (not percentage)
 
 
 class OptimizerResponseModel(BaseModel):
@@ -80,7 +80,7 @@ async def optimize_route(request: OptimizerRequestModel):
         with open("app/data/nifty500_sectors.json") as f:
             sectors_map = json.load(f)
         
-    sector_lower = request.sector_weights
+    sector_lower = sector_weights
 
     sector_upper = {}
 
@@ -95,6 +95,12 @@ async def optimize_route(request: OptimizerRequestModel):
     performance, invested, weights, remaining, start_date = optimize(timed_df, exp_ret_type, cov_type, weight_type, invest_amount, sectors_map, sector_lower, sector_upper)
     expected_returns, volatility, sharpe_ratio = performance
 
+
+    # sector_map = {stock:sector} 
+
+    sector_allocation = {
+        stock: sector for stock, sector in sectors_map.items() if stock in weights.keys()
+    }
 
     equal_weights_results = {
         "portfolio_variance": portfolio_variance,
@@ -113,7 +119,8 @@ async def optimize_route(request: OptimizerRequestModel):
         },
         "weights": weights,
         "invested": invested,
-        "remaining": remaining
+        "remaining": remaining,
+        "sector_allocation": sector_allocation
     }
 
     return OptimizerResponseModel(optimized_results=optimized_results, equal_weights_results=equal_weights_results, start_date=start_date.strftime("%Y-%m-%d"))
@@ -169,158 +176,3 @@ async def backtest(request: BackTestRequestModel):
     
 
     return BackTestResponseModel(optimized_results=results, equal_weights_results=equal_weights_results, start_date=start_date.strftime("%Y-%m-%d"))
-
-test_data = {
-    "equal_weights_results": {
-        "portfolio_variance": 0.004963779959499332,
-        "portfolio_volatility": 0.07045409824488091,
-        "portfolio_annual_return": 0.09682859410372963,
-        "percent_var": "0.0%",
-        "percent_vols": "7.000000000000001%",
-        "percent_ret": "10.0%"
-    },
-    "optimized_results": {
-        "performance": {
-            "expected_returns": 0.7224022509720792,
-            "volatility": 0.10000000005292847,
-            "sharpe_ratio": 7.024022506003084
-        },
-        "weights": {
-            "360ONE": 2.7220272202722033,
-            "ACI": 0.5790057900579006,
-            "BAJAJ-AUTO": 10.618106181061812,
-            "BRITANNIA": 4.472044720447205,
-            "CIPLA": 5.509055090550906,
-            "CONCORDBIO": 0.08800088000880012,
-            "DRREDDY": 2.5250252502525035,
-            "GILLETTE": 1.3140131401314017,
-            "GLAXO": 4.529045290452905,
-            "HAL": 1.9140191401914024,
-            "IRFC": 4.118041180411805,
-            "KALYANKJIL": 5.409054090540906,
-            "KAYNES": 5.440054400544006,
-            "KFINTECH": 2.929029290292904,
-            "LT": 1.0160101601016012,
-            "MAXHEALTH": 3.9240392403924047,
-            "MEDANTA": 10.520105201052013,
-            "METROBRAND": 1.9460194601946024,
-            "MRF": 8.41208412084121,
-            "NESTLEIND": 3.2910329103291036,
-            "PFIZER": 4.010040100401004,
-            "POLYCAB": 1.4610146101461017,
-            "POWERGRID": 1.9400194001940023,
-            "RAINBOW": 3.838038380383804,
-            "SANOFI": 4.767047670476705,
-            "TCS": 1.5710157101571018,
-            "VIJAYA": 1.1370113701137012
-        },
-        "invested": {
-            "360ONE": {
-                "price": 721.7000122070312,
-                "units": 3,
-                "allocated": 2165.1000366210938
-            },
-            "ACI": {
-                "price": 789.9500122070312,
-                "units": 1,
-                "allocated": 789.9500122070312
-            },
-            "BAJAJ-AUTO": {
-                "price": 8436.9501953125,
-                "units": 1,
-                "allocated": 8436.9501953125
-            },
-            "BRITANNIA": {
-                "price": 4936.35009765625,
-                "units": 1,
-                "allocated": 4936.35009765625
-            },
-            "CIPLA": {
-                "price": 1466.4000244140625,
-                "units": 4,
-                "allocated": 5865.60009765625
-            },
-            "DRREDDY": {
-                "price": 6442.14990234375,
-                "units": 1,
-                "allocated": 6442.14990234375
-            },
-            "GLAXO": {
-                "price": 2170.800048828125,
-                "units": 2,
-                "allocated": 4341.60009765625
-            },
-            "HAL": {
-                "price": 3045.5,
-                "units": 1,
-                "allocated": 3045.5
-            },
-            "IRFC": {
-                "price": 153.1999969482422,
-                "units": 25,
-                "allocated": 3829.9999237060547
-            },
-            "KALYANKJIL": {
-                "price": 384.6499938964844,
-                "units": 14,
-                "allocated": 5385.099914550781
-            },
-            "KAYNES": {
-                "price": 2854.35009765625,
-                "units": 2,
-                "allocated": 5708.7001953125
-            },
-            "KFINTECH": {
-                "price": 703.0499877929688,
-                "units": 4,
-                "allocated": 2812.199951171875
-            },
-            "MAXHEALTH": {
-                "price": 851.9000244140625,
-                "units": 4,
-                "allocated": 3407.60009765625
-            },
-            "MEDANTA": {
-                "price": 1487.050048828125,
-                "units": 7,
-                "allocated": 10409.350341796875
-            },
-            "METROBRAND": {
-                "price": 1138.8499755859375,
-                "units": 1,
-                "allocated": 1138.8499755859375
-            },
-            "NESTLEIND": {
-                "price": 2579,
-                "units": 1,
-                "allocated": 2579
-            },
-            "PFIZER": {
-                "price": 4458.7001953125,
-                "units": 1,
-                "allocated": 4458.7001953125
-            },
-            "POWERGRID": {
-                "price": 281.95001220703125,
-                "units": 7,
-                "allocated": 1973.6500854492188
-            },
-            "RAINBOW": {
-                "price": 1280.4000244140625,
-                "units": 3,
-                "allocated": 3841.2000732421875
-            },
-            "SANOFI": {
-                "price": 9134.849609375,
-                "units": 1,
-                "allocated": 9134.849609375
-            },
-            "VIJAYA": {
-                "price": 653.9000244140625,
-                "units": 1,
-                "allocated": 653.9000244140625
-            }
-        },
-        "remaining": 8643.699079943282
-    }
-}
