@@ -2,6 +2,7 @@ from collections import defaultdict
 import math
 from pypfopt import expected_returns
 from pypfopt import risk_models
+from pypfopt import objective_functions
 from pypfopt.efficient_frontier import EfficientFrontier
 import numpy as np
 import pandas as pd
@@ -100,6 +101,7 @@ def efficient_frontier(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dic
 
     # Optimize for the maximal Sharpe ratio
     ef = EfficientFrontier(mu, S_f, solver="ECOS")
+    ef.add_objective(objective_functions.L2_reg, gamma=2)
 
     ef.add_sector_constraints(sectors_map, sector_lower, sector_upper)
 
