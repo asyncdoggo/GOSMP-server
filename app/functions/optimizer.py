@@ -10,6 +10,7 @@ from pypfopt.discrete_allocation import DiscreteAllocation
 from pypfopt.exceptions import OptimizationError
 import datetime
 
+
 def without_optimization(timed_df: pd.DataFrame):
     """
     This function calculates the portfolio variance, volatility, and annual return without optimization.
@@ -42,8 +43,8 @@ def without_optimization(timed_df: pd.DataFrame):
     percent_var = str(round(port_variance, 2) * 100) + '%'
     percent_vols = str(round(port_volatility, 2) * 100) + '%'
     percent_ret = str(round(port_annual_return, 2) * 100) + '%'
-
-    return port_variance, port_volatility, port_annual_return, percent_var, percent_vols, percent_ret
+    sharpe_ratio = str(round(port_annual_return / port_volatility, 2))
+    return port_variance, port_volatility, port_annual_return, percent_var, percent_vols, percent_ret, sharpe_ratio
 
 
 def optimize(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_type: dict, invest_amount: int, sectors_map: dict, sector_lower: dict, sector_upper: dict):
@@ -134,7 +135,7 @@ def _discrete_allocate(invest_amount, refined_weights, timed_df, start_date):
         ndf.index[ndf.index.get_indexer([start_date], method='nearest')]
     ]
     lp = pd.Series(lp.values[0], index=lp.columns)
-    
+
     da = DiscreteAllocation(refined_weights, lp,
                             total_portfolio_value=invest_amount)
 
@@ -163,7 +164,7 @@ def _allocate_nifty(invest_amount, nifty, start_date):
     return {"nifty": {"price": lp, "units": allocation, "allocated": lp * allocation}}, leftover
 
 
-def BackTest(df, start_date, duration, weights ):
+def BackTest(df, start_date, duration, weights):
     """
     duration: in days
     startDate: starting date string
