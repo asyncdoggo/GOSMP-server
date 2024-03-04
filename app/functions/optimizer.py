@@ -4,6 +4,7 @@ from pypfopt import expected_returns
 from pypfopt import risk_models
 from pypfopt import objective_functions
 from pypfopt.efficient_frontier import EfficientFrontier
+from pypfopt.black_litterman import BlackLittermanModel
 import numpy as np
 import pandas as pd
 from pypfopt.discrete_allocation import DiscreteAllocation
@@ -47,9 +48,21 @@ def without_optimization(timed_df: pd.DataFrame):
     return port_variance, port_volatility, port_annual_return, percent_var, percent_vols, percent_ret, sharpe_ratio
 
 
-def optimize(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_type: dict, invest_amount: int, sectors_map: dict, sector_lower: dict, sector_upper: dict):
-    performance, refined_weights = efficient_frontier(
-        timed_df, exp_ret_type, cov_type, weight_type, sectors_map, sector_lower, sector_upper)
+def optimize(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dict, weight_type: dict, invest_amount: int, sectors_map: dict, sector_lower: dict, sector_upper: dict, optimzer="efficient_frontier"):
+
+    performance, refined_weights = None, None
+
+    if optimzer == "efficient_frontier":
+        performance, refined_weights = efficient_frontier(
+            timed_df, exp_ret_type, cov_type, weight_type, sectors_map, sector_lower, sector_upper)
+
+    elif optimzer == "black_litterman":
+        performance, refined_weights = BlackLitterman(
+            timed_df, exp_ret_type, cov_type, weight_type, sectors_map, sector_lower, sector_upper)
+
+    elif optimzer == "monte_carlo":
+        performance, refined_weights = monte_carlo_sector(
+            timed_df, sectors_map, sector_lower)
 
     start_date = timed_df.index[timed_df.index.get_indexer(
         [datetime.datetime.now().date()], method='nearest')][0].date()
@@ -124,6 +137,137 @@ def efficient_frontier(timed_df: pd.DataFrame, exp_ret_type: dict, cov_type: dic
     performance = ef.portfolio_performance(verbose=True)
 
     return performance, refined_weights
+
+
+def BlackLitterman(timed_df, exp_ret_type, cov_type, weight_type, sectors_map, sector_lower, sector_upper):
+    # Calculate expected returns and sample covariance matrix
+    mu = None
+    if exp_ret_type["type"] == "mean":
+        mu = expected_returns.mean_historical_return(
+            timed_df, frequency=exp_ret_type["frequency"])
+
+    elif exp_ret_type["type"] == "ema":
+        mu = expected_returns.ema_historical_return(
+            timed_df, log_returns=exp_ret_type["log_returns"])
+
+    elif exp_ret_type["type"] == "capm":
+        mu = expected_returns.capm_return(timed_df)
+
+    mu.fillna(0, inplace=True)
+    mu.replace(np.inf, 0.0, inplace=True)
+
+   
+    S = None
+    if cov_type["type"] == "sample_cov":
+        S = risk_models.sample_cov(timed_df)
+
+    elif cov_type["type"] == "exp_cov":
+        S = risk_models.exp_cov(timed_df)
+
+    elif cov_type["type"] == "shrinkage":
+        S = risk_models.CovarianceShrinkage(timed_df)
+
+    S.fillna(0, inplace=True)
+    S.replace(np.inf, 0.0, inplace=True)
+
+
+    # Specify views
+    views = {
+        # "Stock_1": 0.02,  # Absolute view: 2% expected return for "Stock_1"
+        # Add more views if needed
+    }
+
+    # Black-Litterman model
+    bl = BlackLittermanModel(S, pi=mu, absolute_views=views)
+
+    # Calculate posterior expected returns and covariance matrix
+    bl_return = bl.bl_returns()
+    bl_covariance = bl.bl_cov()
+
+    # Optimize portfolio
+    ef = EfficientFrontier(bl_return, bl_covariance, solver="ECOS")
+    ef.add_objective(objective_functions.L2_reg, gamma=2)
+
+    ef.add_sector_constraints(sectors_map, sector_lower, sector_upper)
+
+    if weight_type["type"] == "max_sharpe":
+        ef.max_sharpe()
+    elif weight_type["type"] == "min_volatility":
+        ef.min_volatility()
+    elif weight_type["type"] == "efficient_risk":
+        ef.efficient_risk(
+            target_volatility=weight_type["target_volatility"])
+    elif weight_type["type"] == "efficient_return":
+        ef.efficient_return(
+            target_return=weight_type["target_return"])
+
+    # calculate the portfolio variance
+    refined_weights = ef.clean_weights()
+
+    # get the portfolio performance and prints it
+    performance = ef.portfolio_performance(verbose=True)
+
+    return performance, refined_weights
+
+
+def monte_carlo_sector(timed_df, sector_map, sector_lower):
+    num_days_per_year = 252
+    num_simulations = 10000
+
+    df = timed_df
+    num_stocks = len(df.columns)
+
+    # Define portfolio weights (initial guess)
+    weights = np.random.random(num_stocks)
+    weights /= np.sum(weights)
+
+    # Calculate returns and covariance matrix
+    returns = df.pct_change()
+    mean_returns = returns.mean()
+    cov_matrix = returns.cov()
+
+    # Monte Carlo simulation
+    portfolio_returns = []
+    portfolio_volatilities = []
+    weights_list = []
+
+    for _ in range(num_simulations):
+        # Generate random weights
+        weights = np.random.random(num_stocks)
+        weights /= np.sum(weights)
+
+        # Apply sector constraints
+        for sector, min_weight in sector_lower.items():
+            sector_indices = [i for i, stock in enumerate(
+                df.columns) if sector_map[stock] == sector]
+            sector_weights = weights[sector_indices]
+            total_sector_weight = np.sum(sector_weights)
+            if total_sector_weight < min_weight:
+                sector_weights *= min_weight / total_sector_weight
+            weights[sector_indices] = sector_weights / np.sum(sector_weights)
+
+        # Calculate portfolio returns and volatility
+        portfolio_return = np.sum(mean_returns * weights) * num_days_per_year
+        portfolio_volatility = np.sqrt(np.dot(weights.T, np.dot(
+            cov_matrix, weights))) * np.sqrt(num_days_per_year)
+
+        portfolio_returns.append(portfolio_return)
+        portfolio_volatilities.append(portfolio_volatility)
+        weights_list.append(weights)
+
+    portfolio_returns = np.array(portfolio_returns)
+    portfolio_volatilities = np.array(portfolio_volatilities)
+    weights_list = np.array(weights_list)
+
+
+    # get optimal portfolio
+    max_sharpe_idx = np.argmax(portfolio_returns / portfolio_volatilities)
+    weights = weights_list[max_sharpe_idx]
+    returns = portfolio_returns[max_sharpe_idx]
+    volatility = portfolio_volatilities[max_sharpe_idx]
+    sharpe_ratio = returns / volatility
+
+    return [returns, volatility, sharpe_ratio] , weights
 
 
 def _discrete_allocate(invest_amount, refined_weights, timed_df, start_date):

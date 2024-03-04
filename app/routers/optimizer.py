@@ -17,6 +17,7 @@ class OptimizerRequestModel(BaseModel):
     duration: int  # months
     index: str = "nifty500"
     sector_weights: dict = {}  # decimal weights (not percentage)
+    optimizer: str = "efficient_frontier"
 
 
 class OptimizerResponseModel(BaseModel):
@@ -29,8 +30,8 @@ class OptimizerResponseModel(BaseModel):
 async def optimize_route(request: OptimizerRequestModel):
     risk_category = request.risk_category
     invest_amount = request.invest_amount
-    duration = request.duration
     sector_weights = request.sector_weights
+    optimizer = request.optimizer
 
     if sum(sector_weights.values()) > 1:
         return {"error": "Sum of sector weights should be less than or equal to 1"}
@@ -91,10 +92,8 @@ async def optimize_route(request: OptimizerRequestModel):
         timed_df)
 
     performance, invested, weights, remaining, start_date = optimize(
-        timed_df, exp_ret_type, cov_type, weight_type, invest_amount, sectors_map, sector_lower, sector_upper)
+        timed_df, exp_ret_type, cov_type, weight_type, invest_amount, sectors_map, sector_lower, sector_upper, optimzer=optimizer)
     expected_returns, volatility, sharpe_ratio = performance
-
-    # sector_map = {stock:sector}
 
     sector_allocation = {
         stock: sector for stock, sector in sectors_map.items() if stock in weights.keys()
