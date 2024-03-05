@@ -38,7 +38,7 @@ def load_and_clean(timed_df, risk_cat):
         timed_df[col] = timed_df.apply(
             lambda row: row[col] if row[col] != 0 else rolling_mean[row.name], axis=1)
 
-    timed_df = _risk_categorize(timed_df, risk_cat)
+    # timed_df = _risk_categorize(timed_df, risk_cat)
 
     return timed_df
 
